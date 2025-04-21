@@ -3,12 +3,19 @@ const express = require("express");
 const path = require("path");
 const sessions = require("express-session");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 // Load environment variables from .env file
 dotenv.config();
 
 // initializing the express environment
 const app = express();
+
+// Allow frontend at port 5173 to access this API
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://your-vercel-site.vercel.app'],
+    credentials: true
+  }));
 
 // using 8888 port
 const port = process.env.PORT || "8888";
